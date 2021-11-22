@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
-local Window = Library.CreateLib("PrisonLife.HVH", colors)
+local Window = Library.CreateLib("PrisonLife.HVH", "Serpent")
 local colors = {
     SchemeColor = Color3.fromRGB(0,255,255),
     Background = Color3.fromRGB(50, 34, 60),
@@ -121,7 +121,7 @@ local Credit = Window:NewTab("Credit")
 local CreditSection = Credit:NewSection("Designer - Klupp")
 local CreditSection = Credit:NewSection("Script Maker - Klupp")
 local CreditSection = Credit:NewSection("Best - Klupp")
-local CreditSection = Credit:NewSection("BEST BEST BEST BEST BEST Server - .gg/floppatools")
+local CreditSection = Credit:NewSection("BEST BEST BEST BEST- Server - .gg/floppatools")
 local CreditSection = Credit:NewSection("Basically Everything - Klupp")
 
 local Info = Window:NewTab("Info")
@@ -132,7 +132,7 @@ end)
 
 local Customize = Window:NewTab("Customize")
 local CustomizeSection = Customize:NewSection("Customize")
-CustomizeSection:NewColorPicker("Colorize The Text", "Literally In The Text", Color3.fromRGB(0,0,0), function(color)
+CustomizeSection:NewColorPicker("Colorize The Text(BETA)", "Literally In The Text", Color3.fromRGB(0,0,0), function(color)
     print(color)
     -- Second argument is the default color
 end)
