@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
-local Window = Library.CreateLib("Klupp UI", colors)
+local Window = Library.CreateLib("PrisonLife.HVH", colors)
 local colors = {
     SchemeColor = Color3.fromRGB(0,255,255),
     Background = Color3.fromRGB(50, 34, 60),
@@ -11,6 +11,54 @@ local colors = {
 
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Silent Aim", "rage, RAGE, FUCKING RAGE", function()
+
+wait(0.2)
+local Players = game.Players
+local LocalPlayer = Players.LocalPlayer
+local GetPlayers = Players.GetPlayers
+local Camera = workspace.CurrentCamera
+local WTSP = Camera.WorldToScreenPoint
+local FindFirstChild = game.FindFirstChild
+local Vector2_new = Vector2.new
+local Mouse = LocalPlayer.GetMouse(LocalPlayer)
+function ClosestChar()
+    local Max, Close = math.huge
+    for I,V in pairs(GetPlayers(Players)) do
+        if V ~= LocalPlayer and V.Team ~= LocalPlayer.Team and V.Character then
+            local Head = FindFirstChild(V.Character, "Head")
+            if Head then
+                local Pos, OnScreen = WTSP(Camera, Head.Position)
+                if OnScreen then
+                    local Dist = (Vector2_new(Pos.X, Pos.Y) - Vector2_new(Mouse.X, Mouse.Y)).Magnitude
+                    if Dist < Max then
+                        Max = Dist
+                        Close = V.Character
+                    end
+                end
+            end
+        end
+    end
+    return Close
+end
+
+local MT = getrawmetatable(game)
+local __namecall = MT.__namecall
+setreadonly(MT, false)
+MT.__namecall = newcclosure(function(self, ...)
+    local Method = getnamecallmethod()
+    if Method == "FindPartOnRay" and not checkcaller() and tostring(getfenv(0).script) == "GunInterface" then
+        local Character = ClosestChar()
+        if Character then
+            return Character.Head, Character.Head.Position
+        end
+    end
+
+    return __namecall(self, ...)
+end)
+setreadonly(MT, true)
+end)
 
 MainSection:NewDropdown("Give items (BETA)", "Self Explanatory", {"Press To Get Items"}, function(currentOption)
     print(currentOption)
